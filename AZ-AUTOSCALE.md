@@ -86,13 +86,12 @@ az network lb list -g learn-azure | grep 'LB",'
 az network lb rule create \
 -g learn-azure \
 --name HTTPrule \
---lb-name az-vmssLBBEPool \
+--lb-name az-vmssLB \
 --protocol tcp \
 --frontend-port 80 \
 --backend-port 80 \ 
---probe-name HealthProbe \ 
 --disable-outbound-snat true \ 
 --idle-timeout 15 
 ```
 
-11. 
+11. **That's it! You now have a working machine scale set.**
