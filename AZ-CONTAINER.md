@@ -5,19 +5,19 @@
 
 1. Create a container 
 
-`az container create -g learn-azure -n nginx-cntr --image nginx --ip-address Public`
+`az container create -g learn-azure -n nginx-cntr --image nginx --ip-address Public --ports 80`
 
 2. Get IP of the container
 
 `az container show -g learn-azure -n nginx-cntr --query ipAddress.ip --output tsv`
 
-3. Acces the container 
+3. Access the container 
 
 `az container exec -g learn-azure -n nginx-cntr --exec-command /bin/bash`
 
 4. Install some packages that will help us create a static webpage. 
 
-`apt-get update && apt-get install vim`
+`apt update && apt install vim`
 
 5. Make static test page. 
 
