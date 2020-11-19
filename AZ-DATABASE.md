@@ -97,7 +97,60 @@ if __name__ == "__main__":
 
 7. Replace the app.py with code that will read our database remotely
 
-`The code for that python app is available on my GitHub`
+```
+from flask import Flask
+from flask import jsonify
+import login
+import mysql.connector
+from mysql.connector import errorcode
+
+#Obtain connection string information from the portal
+app = Flask(__name__)
+
+@app.route('/')
+def db_connect():
+	try:
+		conn = login.connect()
+		print("Connection established.")
+	except mysql.connector.Error as err:
+		if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+			print("Something wrong with username or password")
+		elif err.errno == errorcode.ER_BAD_DB_ERROR:
+			print("Database does not exist")
+		else:
+			print(err)
+	else:
+		cursor = conn.cursor()
+		
+		# Read Data
+		cursor.execute("SELECT * FROM fruit;")
+		rows = cursor.fetchall()
+		print("Read", cursor.rowcount, "row(s) of data.")
+
+		# Print all rows
+		my_list = []
+		for row in rows:
+			my_list.append ("Data row = (%s, %s, %s)" %(str(row[0]),
+				str(row[1]), str(row[2])))
+
+		# Cleanup
+		conn.commit()
+		cursor.close()
+		conn.close()
+		return jsonify(my_list)
+		
+if __name__ == '__main__':
+	app.run(debug=True,host='0.0.0.0')
+```
+
+Note: Make sure you include the file `config.ini`:
+```
+[mysqlDB]
+host = 
+user =
+password = 
+database =
+```
 
 8. Edit NGINX config 
 
