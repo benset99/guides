@@ -8,18 +8,18 @@ Make sure you correctly configured AWS CLI before starting with this guide.
   
 ## Deploy a EC2 Instance 
 
-_Create a security group which acts as a virtual firewall for the EC2 Instance:  _ 
+*Create a security group which acts as a virtual firewall for the EC2 Instance:*   
 `aws ec2 create-security-group --group-name EC2access --description "Allows for SSH and HTTP connections` 
 * This will output the GroupID and you will need to write it down somewhere for
 later.
 
-_Open ports to the newly created security group to allow SSH and HTTP connections into our EC2 instance: _
+*Open ports to the newly created security group to allow SSH and HTTP connections into our EC2 instance:*  
 ```
 aws ec2 authorize-security-group-ingress --group-name EC2access --protocol tcp --port 22 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-name EC2access --protocol tcp --port 80 --cidr 0.0.0.0/0
 ```
 
-_Create a key pair used to access our EC2 instance via SSH without a password:  _
+*Create a key pair used to access our EC2 instance via SSH without a password:*  
 `aws ec2 create-key-pair --key-name EC2-key --query 'KeyMaterial' --output text > EC2-key.pem`
 
 * Verify the keypair was successfully created.   
@@ -29,7 +29,7 @@ _Create a key pair used to access our EC2 instance via SSH without a password:  
 `sudo chmod 600 E2-key.pem` 
 
 ## Create an EC2 instance  
-_Create a t2.micro instance type:  _
+*Create a t2.micro instance type:*  
 `aws ec2 run-instances --image-id ami-0e6d2e8684d4ccb3e --security-group-ids sg-0c28afaf2c775e906 --instance-type t2.micro --key-name EC2-key`  
 * Note: This will take several minutes to create an instance.  
 
