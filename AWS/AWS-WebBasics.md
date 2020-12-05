@@ -1,11 +1,11 @@
 # AWS Learning Series
-Where I document my AWS learning adventure
-Prerequisites:
+Where I document my AWS learning adventure  
+Prerequisites:  
 * Some working knowledge of Linux 
 
 # Web Hosting Basics
-Make sure you correctly configured AWS CLI before starting with this guide.
-
+Make sure you correctly configured AWS CLI before starting with this guide.    
+  
 ## Deploy a EC2 Instance 
 
 Create a security group which acts as a virtual firewall for the EC2 Instance: 
