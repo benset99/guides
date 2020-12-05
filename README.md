@@ -4,6 +4,7 @@ It is also for anyone who happens to stumble upon these guides.
 All under the FDL (see license).
 
 **Additional Guides W.I.P.**
+- AWS Learning Series
 - Kubernetes
 - Ansible
 - REST API 
