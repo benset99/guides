@@ -91,7 +91,7 @@ server {
 
     index index.html;
 
-    server_name your-ip-here;
+    server_name ec2-18-234-134-192.compute-1.amazonaws.com;
 
     access_log /var/log/nginx/example-one.com.access.log;
     error_log /var/log/nginx/example-one.com.error.log;
