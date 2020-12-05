@@ -75,13 +75,13 @@ sudo vi /var/www/example.com/public_html/index.html
 * For now, just put placeholder HTML code:  
 `<h1>Fortune-of-the-Day coming soon</h1>`
 
-Change permissions of the newly created `index.html` file: 
+* Change permissions of the newly created `index.html` file:   
 `sudo chown -R nginx: /var/www/example.com`
 
-Create NGINX config file:
+Create NGINX config file:  
 `sudo vi /etc/nginx/conf.d/example.com.conf`
 
-You should input this in the file:
+* You should input this in the file:
 ```
 server {
     listen 80;
@@ -102,7 +102,7 @@ server {
 }
 ```
 
-Check configuration and restart NGINX:
+* Check configuration and restart NGINX:
 ```
 sudo nginx -t 
 sudo systemctl restart nginx
