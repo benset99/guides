@@ -67,12 +67,12 @@ sudo systemctl enable nginx
 ```
 * Navigate to your web browser and type in the EC2 instance's public IP address to see if NGINX works and if it does, you should see the NGINX message.
 
-* Set up NGINX server blocks:  
+Set up NGINX server blocks:  
 ```
 sudo mkdir -p /var/www/example.com/public_html
 sudo vi /var/www/example.com/public_html/index.html
 ```
-* For now, just put placeholder HTML code:  
+* Put placeholder HTML code:  
 `<h1>Fortune-of-the-Day coming soon</h1>`
 
 * Change permissions of the newly created `index.html` file:   
@@ -91,7 +91,7 @@ server {
 
     index index.html;
 
-    server_name ec2-54-237-54-51.compute-1.amazonaws.com;
+    server_name your-ip-here;
 
     access_log /var/log/nginx/example-one.com.access.log;
     error_log /var/log/nginx/example-one.com.error.log;
@@ -102,7 +102,7 @@ server {
 }
 ```
 
-* Check configuration and restart NGINX:
+Check configuration and restart NGINX:
 ```
 sudo nginx -t 
 sudo systemctl restart nginx
@@ -111,35 +111,33 @@ sudo systemctl restart nginx
 If you did everything correctly, it should output your HTML file that you
 created.
 
-
 ## Take a snapshot of VM, delete VM, and deploy new VM from snapshot
 
-1. Get ID of your volume
+Get ID of your volume:  
 `aws ec2 describe-instances --instance-id i-0e69629cb2642f8e7 | grep vol`
 
-2. Create the snapshot
+Create the snapshot:  
 `aws ec2 create-snapshot --volume-id vol-0b75debd2e1a2bd3f --description "static NGINX server"`
 
-Note: Make sure you write down the SnapshotID
+* Note: Make sure you write down the SnapshotID
 
-3. Once the snapshot has been created, delete the old EC2 instance
-
+* Once the snapshot has been created, delete the old EC2 instance:  
 ```
 aws ec2 stop-instances --instance-ids i-037f94e41eca40983 
 aws ec2 terminate-instances --instance-ids i-037f94e41eca40983   
 ```
 
-4. Create a new image based on the snapshot we just created
-aws ec2 register-image --name "nginxStatic" --region=us-east-1 --description "AMI from snapshot EBS" --block-device-mappings DeviceName="/dev/sda",Ebs={SnapshotId="snap-0753fa2dadbf4eb94"} --root-device-name "/dev/sda1"
+Create a new image based on the snapshot we just created:  
+`aws ec2 register-image --name "nginxStatic" --region=us-east-1 --description "AMI from snapshot EBS" --block-device-mappings DeviceName="/dev/sda",Ebs={SnapshotId="snap-0753fa2dadbf4eb94"} --root-device-name "/dev/sda1"`
 
-Note: Make sure you write down the ImageID
+* Note: Make sure you write down the ImageID
 
-5. Deploy a new EC2 instance from the volume that we just created
+Deploy a new EC2 instance from the volume that we just created:  
 `aws ec2 run-instances --image-id ami-05b2a7a22fe19b0f0 --security-group-ids sg-0c28afaf2c775e906 --instance-type t2.micro --key-name EC2-key`
 
-Note: Make sure you write down the public IP address
+* Note: Make sure you write down the public IP address
 
-6. Check if your newly created instance works
+* Check if your newly created instance works:  
 `curl ec2-18-234-134-192.compute-1.amazonaws.com`
 
 ### CONGRATULATIONS! You now know how to create a EC2 instance, create an image from the EC2 instance, and deploy the image as an instance
