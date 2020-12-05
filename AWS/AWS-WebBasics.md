@@ -25,26 +25,21 @@ Create a key pair used to access our EC2 instance via SSH without a password:
 * Verify the keypair was successfully created.   
 `cat E2-key.pem`
 
-* Change the permissions  
+* Change the permissions.  
 `sudo chmod 600 E2-key.pem` 
 
 ## Create an EC2 instance  
-Create a t2.micro instance type
+Create a t2.micro instance type:  
+`aws ec2 run-instances --image-id ami-0e6d2e8684d4ccb3e --security-group-ids sg-0c28afaf2c775e906 --instance-type t2.micro --key-name EC2-key`  
+* Note: This will take several minutes to create an instance.  
 
-`aws ec2 run-instances --image-id ami-0e6d2e8684d4ccb3e --security-group-ids sg-0c28afaf2c775e906 --instance-type t2.micro --key-name EC2-key`
-
-Note: This will take several minutes to create an instance.
-
-5. Obtain public IP address of the instance and connect to your instance
-Used to connect to our EC2 instance over the Internet
-
+Obtain public IP address of the instance and connect to your instance:  
 `aws ec2 describe-instances --instance-ids i-0e69629cb2642f8e7 --query 'Reservations[0].Instances[0].PublicIpAddress'`
 
-Now, use the public ip to connect to the newly created EC2 instance
+Use the public ip to connect to the newly created EC2 instance:  
+`ssh -i EC2-key.pem ec2-user@54.237.54.51`  
 
-`ssh -i EC2-key.pem ec2-user@54.237.54.51`
-
-If you see this:
+* If you see this:  
 ```
 
        __|  __|_  )
