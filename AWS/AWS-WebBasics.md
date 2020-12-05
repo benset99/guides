@@ -33,13 +33,13 @@ Create a t2.micro instance type:
 `aws ec2 run-instances --image-id ami-0e6d2e8684d4ccb3e --security-group-ids sg-0c28afaf2c775e906 --instance-type t2.micro --key-name EC2-key`  
 * Note: This will take several minutes to create an instance.  
 
-Obtain public IP address of the instance and connect to your instance:  
+Obtain public IP address of the instance and connect to the instance:  
 `aws ec2 describe-instances --instance-ids i-0e69629cb2642f8e7 --query 'Reservations[0].Instances[0].PublicIpAddress'`
 
 Use the public ip to connect to the newly created EC2 instance:  
 `ssh -i EC2-key.pem ec2-user@54.237.54.51`  
 
-* If you see this:  
+* If the following text below is displayed, then successfully accessed the EC2 instance:  
 ```
 
        __|  __|_  )
@@ -51,41 +51,28 @@ https://aws.amazon.com/amazon-linux-2/
 Run "sudo yum update" to apply all updates.
 ```
 
-Then, you have successfully created a EC2 instance
-
-Note: If you need to terminate your EC2 instance at any time, simply run these
-commands:
-
+* Note: If you need to terminate your EC2 instance at any time, simply run these commands:  
 ```
 aws ec2 stop-instances --instance-ids i-0e69629cb2642f8e7 
 aws ec2 terminate-instances --instance-ids i-0e69629cb2642f8e7 
 ```
 
-## Host a simple static page on our newly created EC2 instance. 
-
-1. Update packages
-
-`sudo yum update`
-
-2. Install, start, and enable NGINX
-
+## Host a simple static page on our newly created EC2 instance.   
+Update packages and install NGINX:  
 ```
+sudo yum update
 sudo amazon-linux-extras install nginx1
 sudo systemctl start nginx
 sudo systemctl enable nginx
 ```
+* Navigate to your web browser and type in the EC2 instance's public IP address to see if NGINX works and if it does, you should see the NGINX message.
 
-Navigate to your web browser and type in the EC2 instance's public IP address
-to see if NGINX works and if it does, you should see the NGINX message.
-
-3. Set up NGINX server blocks
-
+* Set up NGINX server blocks:  
 ```
 sudo mkdir -p /var/www/example.com/public_html
 sudo vi /var/www/example.com/public_html/index.html
 ```
-
-For now, just put placeholder HTML code:
+* For now, just put placeholder HTML code:  
 `<h1>Fortune-of-the-Day coming soon</h1>`
 
 Change permissions of the newly created `index.html` file: 
