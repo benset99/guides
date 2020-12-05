@@ -8,13 +8,13 @@ Make sure you correctly configured AWS CLI before starting with this guide.
 
 ## Deploy a EC2 VM 
 
-1. Create a security group
-Used to limit access into our instance
+Create a security group:
+* Security groups are used to limit access into our instance
 
-`aws ec2 create-security-group --group-name EC2access --description "Allows
+* `aws ec2 create-security-group --group-name EC2access --description "Allows
 for SSH and HTTP connections` 
 
-This will output the GroupID and you will need to write it down somewhere for
+* This will output the GroupID and you will need to write it down somewhere for
 later.
 
 2. Open ports to the newly created security group
