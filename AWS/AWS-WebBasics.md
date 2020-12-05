@@ -16,14 +16,11 @@ later.
 Open ports to the newly created security group to allow SSH and HTTP connections into our EC2 instance: 
 ```
 aws ec2 authorize-security-group-ingress --group-name EC2access --protocol tcp --port 22 --cidr 0.0.0.0/0
-
-aws ec2 authorize-security-group-ingress --group-name EC2access --protocol
-tcp --port 80 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-name EC2access --protocol tcp --port 80 --cidr 0.0.0.0/0
 ```
 
 Create a key pair used to access our EC2 instance via SSH without a password:  
-`aws ec2 create-key-pair --key-name EC2-key --query 'KeyMaterial' --output
-text > EC2-key.pem`
+`aws ec2 create-key-pair --key-name EC2-key --query 'KeyMaterial' --output text > EC2-key.pem`
 
 * Verify the keypair was successfully created.   
 `cat E2-key.pem`
@@ -31,8 +28,8 @@ text > EC2-key.pem`
 * Change the permissions  
 `sudo chmod 600 E2-key.pem` 
 
-4.  Create an EC2 instance
-In this guide, we are going to use the t2.micro instance type
+## Create an EC2 instance  
+Create a t2.micro instance type
 
 `aws ec2 run-instances --image-id ami-0e6d2e8684d4ccb3e --security-group-ids sg-0c28afaf2c775e906 --instance-type t2.micro --key-name EC2-key`
 
