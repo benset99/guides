@@ -1,25 +1,19 @@
 # AWS Learning Series
 Where I document my AWS learning adventure
 Prerequisites:
-- Some working knowledge of Linux and working within a terminal
+* Some working knowledge of Linux 
 
 # Web Hosting Basics
 Make sure you correctly configured AWS CLI before starting with this guide.
 
-## Deploy a EC2 VM 
+## Deploy a EC2 Instance 
 
-Create a security group:
-* Security groups are used to limit access into our instance
-
-* `aws ec2 create-security-group --group-name EC2access --description "Allows
-for SSH and HTTP connections` 
-
+* Create a security group which acts as a virtual firewall for the EC2 Instance:
+`aws ec2 create-security-group --group-name EC2access --description "Allows for SSH and HTTP connections` 
 * This will output the GroupID and you will need to write it down somewhere for
 later.
 
-2. Open ports to the newly created security group
-Used to allow SSH and HTTP connections into our EC2 instance 
-
+Open ports to the newly created security group to allow SSH and HTTP connections into our EC2 instance: 
 ```
 aws ec2 authorize-security-group-ingress --group-name EC2access --protocol tcp --port 22 --cidr 0.0.0.0/0
 
