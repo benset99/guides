@@ -10,6 +10,7 @@ Make sure you correctly configured AWS CLI before starting with this guide.
 
 **Create a security group which acts as a virtual firewall for the EC2 Instance:**   
 `aws ec2 create-security-group --group-name EC2access --description "Allows for SSH and HTTP connections` 
+
 This will output the GroupID and you will need to write it down somewhere for
 later.
 
@@ -33,6 +34,7 @@ Change the permissions.
 `aws ec2 run-instances --image-id ami-0e6d2e8684d4ccb3e --security-group-ids sg-0c28afaf2c775e906 --instance-type t2.micro --key-name EC2-key`  
 
 Note: This will take several minutes to create an instance.  
+
 **Obtain public IP address of the instance and connect to the instance:**  
 `aws ec2 describe-instances --instance-ids i-0e69629cb2642f8e7 --query 'Reservations[0].Instances[0].PublicIpAddress'`
 
@@ -119,7 +121,10 @@ created.
 **Create the snapshot:**  
 `aws ec2 create-snapshot --volume-id vol-0b75debd2e1a2bd3f --description "static NGINX server"`
 
-Note: Make sure you write down the SnapshotID. Once the snapshot has been created, delete the old EC2 instance:  
+Note: Make sure you write down the SnapshotID.
+
+Once the snapshot has been created, delete the old EC2 instance:  
+
 ```
 aws ec2 stop-instances --instance-ids i-037f94e41eca40983 
 aws ec2 terminate-instances --instance-ids i-037f94e41eca40983   
