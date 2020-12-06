@@ -123,7 +123,7 @@ created.
 
 Note: Make sure you write down the SnapshotID.
 
-Once the snapshot has been created, delete the old EC2 instance:  
+(Optional) Delete the old EC2 instance:  
 
 ```
 aws ec2 stop-instances --instance-ids i-037f94e41eca40983 
