@@ -143,4 +143,4 @@ Note: Make sure you write down the public IP address
 Check if your newly created instance works:  
 `curl ec2-18-234-134-192.compute-1.amazonaws.com`
 
-### CONGRATULATIONS! You now know how to create a EC2 instance, create an image from the EC2 instance, and deploy the image as an instance
+### You now have a EC2 instance along with an image to deploy the same EC2 instance whenever you want 
