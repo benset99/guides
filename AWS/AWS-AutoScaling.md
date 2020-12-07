@@ -5,10 +5,7 @@ Prerequisities:
 * Some working knowledge of Linux
 * Followed the AWS-WebBasics guide
 
-# Auto-Scaling Basics
-
-## Creating a launch template
-
+# Auto-Scaling Basics  
 **Create a launch template**
 
 Note: The security group and image was created using the AWS-WebBasics guide found in this repo.  
