@@ -57,8 +57,7 @@ Also, you can stop the EC2 instances in the Auto Scaling group and it will autom
 
 **Delete load balancer and Auto Scaling group**
 
-Make sure you delete the load balancer and Auto Scaling group so it doesn't charge you.
-
+Make sure you delete the load balancer and Auto Scaling group so AWS doesn't charge you:  
 ```
 aws elb delete-load-balancer --load-balancer-name benset-elb
 aws autoscaling delete-auto-scaling-group --auto-scaling-group-name benset-asg --force-delete
