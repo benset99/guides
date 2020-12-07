@@ -6,7 +6,8 @@ Prerequisities:
 * Followed the AWS-WebBasics guide
 
 # Auto-Scaling Basics  
-**Create a launch template**
+## Create a launch template
+**Create a launch template so you can easily deploy our EC2 Instance**
 
 Note: The security group and image was created using the AWS-WebBasics guide found in this repo.  
 
@@ -28,9 +29,9 @@ Output:
 "SubnetId": "subnet-4d018112",
 ```
 
-**Create a load balancer**
+## Create a load balancer and Auto Scaling Group
+**Create a load balancer for the EC2 so that connections to the EC2 application will still be open if one of the EC2 instances go down:**  
 
-Create a load balancer for the EC2 so that connections to the EC2 application will still be open if one of the EC2 instances go down:   
 `aws elb create-load-balancer --load-balancer-name benset-elb --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" --subnets subnet-4d018112 subnet-d679feb0 --security-groups sg-0c28afaf2c775e906`
 
 Write down the output of this command for later use:  
