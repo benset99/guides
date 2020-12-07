@@ -29,7 +29,7 @@ Output:
 "SubnetId": "subnet-4d018112",
 ```
 
-## Create a load balancer and Auto Scaling Group
+## Create a Load Balancer and Auto Scaling Group
 **Create a load balancer for the EC2 so that connections to the EC2 application will still be open if one of the EC2 instances go down:**  
 
 `aws elb create-load-balancer --load-balancer-name benset-elb --listeners "Protocol=HTTP,LoadBalancerPort=80,InstanceProtocol=HTTP,InstancePort=80" --subnets subnet-4d018112 subnet-d679feb0 --security-groups sg-0c28afaf2c775e906`
